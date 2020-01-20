@@ -9,7 +9,6 @@ function SunArc({ sunPosition } : { sunPosition: number }) {
                     position: absolute;
                     width: 500px;
                     height: 500px;
-                    max-width: 100%;
                     top: 82px;
                     border-radius: 50%;
                     display: flex;
@@ -28,6 +27,19 @@ function SunArc({ sunPosition } : { sunPosition: number }) {
                     background: #ffe121;
                     box-shadow: 0 4px 15px rgba(255, 225, 33, 0.7);
                 }           
+
+                @media (max-width: 600px) {
+                    .sun-arc {
+                        width: 300px;
+                        height: 300px;
+                    }
+
+                    .sun {
+                        height: 50px;
+                        width: 50px;
+                        left: -25px;
+                    }
+                }
             `}</style>
         </div>
     )

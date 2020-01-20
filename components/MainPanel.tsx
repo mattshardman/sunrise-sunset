@@ -18,6 +18,12 @@ function MainPanel({ children }) {
                     justify-content: center;
                     align-items: flex-end;
                }         
+
+               @media (max-width: 600px) {
+                   .panel {
+                       height: 280px;
+                   }
+               }
             `}</style>
         </div>
     )

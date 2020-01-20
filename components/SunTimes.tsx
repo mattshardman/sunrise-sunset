@@ -59,6 +59,12 @@ function SunTimes({ times, getTimes, loading }) {
                     box - shadow: 0 2px 10px rgba(0,0,0, 0.1);
                     transform: translateY(-2px);
                 }
+
+                @media (max-width: 600px) {
+                    p, small {
+                        font-size: 12px;
+                    }
+                }
             `}</style>
         </div>
     );
