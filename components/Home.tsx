@@ -1,20 +1,16 @@
 import React from 'react';
 import useTimes from './useTimes';
+import MainPanel from './MainPanel';
+import Layout from './Layout';
 
 function Home() {
-    const { loading, error, times, getTimes } = useTimes();
+    const timeData = useTimes();
 
     return (
-        <main>
-            <div>
-                <p><strong>Sunrise:</strong> {times.sunrise}</p>
-                <p><strong>Sunset:</strong> {times.sunset}</p>
-            </div>
-            <button onClick={getTimes}>
-                { loading ? 'Loading...' : 'Get Location' }
-            </button>
-        </main>
-    )
+        <Layout>
+            <MainPanel {...timeData} />
+        </Layout>
+    );
 }
 
 export default Home;
