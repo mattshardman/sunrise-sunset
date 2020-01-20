@@ -9,7 +9,7 @@ interface Times {
 function useTimes() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [times, setTimes]: [Times, Function] = useState({});
+    const [times, setTimes]: [Times, Function] = useState({ });
 
     const getLocation = async () : Promise<Coordinates> => {
         return new Promise((resolve, reject) => {
