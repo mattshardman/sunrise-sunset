@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function SunArc() {
+function SunArc({ sunPosition } : { sunPosition: number }) {
     return  (
         <div className="sun-arc">
             <div className="sun" />
@@ -15,7 +15,7 @@ function SunArc() {
                     display: flex;
                     align-items: center;
                     border: 1px solid #eaeaea;
-                    transform: rotate(90deg);
+                    transform: rotate(${0 || sunPosition}deg);
                     transition: transform 4s;
                 }     
 

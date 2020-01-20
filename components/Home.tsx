@@ -8,10 +8,12 @@ import SunArc from './SunArc';
 function Home() {
     const timeData = useTimes();
 
+    const { sunPosition } = timeData;
+
     return (
         <Layout>
             <MainPanel>
-                <SunArc />
+                <SunArc sunPosition={sunPosition} />
                 <SunTimes {...timeData} />
             </MainPanel>
         </Layout>

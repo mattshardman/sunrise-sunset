@@ -10,6 +10,26 @@ function useTimes() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [times, setTimes]: [Times, Function] = useState({ });
+    const [sunPosition, setSunPosition] = useState();
+
+    function getTime(timeNow, inputTime) {
+        const now = timeNow.toDateString();
+        return new Date(`${now} ${inputTime}`);
+    }
+    
+    function getTimeNow() {
+        return new Date(Date.now());
+    }
+    
+    function getPosition(results) {
+        const now = getTimeNow();
+        const sunSet = getTime(now, results.sunset);
+        const sunRise = getTime(now, results.sunrise);
+
+        const fullDay = sunSet.valueOf() - sunRise.valueOf();
+        const untilNow = now.valueOf() - sunRise.valueOf();
+        return 180 * untilNow / fullDay;
+    }
 
     const getLocation = async () : Promise<Coordinates> => {
         return new Promise((resolve, reject) => {
@@ -20,13 +40,12 @@ function useTimes() {
                 reject(error);
             });
         });
-
     }
 
     const getSunTimeData = async (coords: Coordinates) => {
         const { latitude, longitude } = coords;
         const response = await axios.post("api/times", { latitude, longitude });
-        const { sunrise, sunset } = response.data;
+        const { sunrise, sunset } : { sunset: number, sunrise: number } = response.data;
         return { sunrise, sunset };
     };
 
@@ -35,6 +54,9 @@ function useTimes() {
         try {
             const coords = await getLocation();
             const sunTimes = await getSunTimeData(coords);
+            const position = getPosition(sunTimes);
+
+            setSunPosition(position);
             setTimes(sunTimes);
             setLoading(false);
         } catch {
@@ -44,7 +66,7 @@ function useTimes() {
        
     }
 
-    return { times, getTimes, loading, error };
+    return { sunPosition, times, getTimes, loading, error };
 }
 
 export default useTimes;
