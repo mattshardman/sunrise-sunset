@@ -1,16 +1,15 @@
 import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-async function handler(req, res) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const url = `https://api.sunrise-sunset.org/json?lat=52&lng=1&date=today`;
-        const result = await axios.get(url);
+        const { latitude, longitude } = req.body;
+        const url = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today`;
+        const response = await axios.get(url);
     
-        console.log(result.data);
-    
-        res.status(200).json(result.data);
-
+        res.status(200).json(response.data.results);
     } catch (err) {
-        console.log(err);
+        res.status(500).send("Error finding sunrise and sunset time");
     }
 }
 
