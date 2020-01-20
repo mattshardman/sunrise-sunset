@@ -4,15 +4,15 @@ function SunTimes({ times, getTimes, loading }) {
     return (
         <div className="times">
             <div className="time">
-                <p><strong>Sunrise:</strong></p>
-                <small>{times.sunrise}</small>
+                <small><strong>Sunrise:</strong></small>
+                <small>{times.sunrise || " "}</small>
             </div>
             <button onClick={getTimes}>
                 {loading ? 'Loading...' : 'Get Location'}
             </button>
             <div className="time">
-                <p><strong>Sunset:</strong></p>
-                <small>{times.sunset}</small>
+                <small><strong>Sunset:</strong></small>
+                <small>{times.sunset || " "}</small>
             </div>
             <style jsx>{`
                 .times {
